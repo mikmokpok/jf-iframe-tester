@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jotform Iframe Testing Utility</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    
+    <div id="background"></div>
+    <script src="bubbles.js"></script>
+    <div class="main">
+        <img src="jotform-logo.png" alt="Jotform logo" class="jotform-logo">
+        <p class="subheader">Iframe tweaking utility</p>
+        <p>Paste in your iframe code below:</p>
+        <form action="preview/preview.php" method="post" target="_blank">
+        <textarea required class="input" name="iframe-content"></textarea>
+        <div class="options">
+            <p><b>Options</b></p>
+            <ul class="option-list">
+                <li>
+                <p>Code modifiers:</p>
+            </li>
+            <li>
+            <input type="checkbox" id="add-parameters">
+            <label>Prefill parameters</label>
+            </li>
+            <li id="dynamicInputButtons" style="display:none;">
+                <input type="button" value="Add more" id="add-more-button">
+                <input type="button" value="Apply" id="applyPrefills">
+            </li>
+            <li id="cutoff">
+            <input type="checkbox" id="fix-cutoff">
+            <label>Fix cut-off</label>
+            </li>
+            <li id="cutoff-buttons" style="display:none;">
+                <input type="text" id="offset" placeholder="Offset">
+            </li>
+            <li>
+            <input type="checkbox" id="fix-ty-page-height">
+            <label>Fix TY page height</label>
+            </li>
+            <li>
+            <input type="checkbox" id="disable-auto-scroll">
+            <label>Disable auto-scroll</label>
+            </li>
+            <li>
+            <input type="checkbox" id="add-scrolling">
+            <label>Add scrolling attribute</label>
+            </li>
+            <li>
+            <input type="checkbox" id="change-fallback-height">
+            <label>Change fallback height</label>
+            </li>
+            <li id="fallback-height" style="display:none;">
+                <input type="text" id="fallback-height-input" placeholder="Enter height">
+            </li>
+            <li>
+            <input type="checkbox" id="add-sandbox-attribute">
+            <label>Add Sandbox attribute</label>
+            </li>
+            <li>
+            <p>Preview modifiers:</p>
+            </li>
+            <li>
+            <input type="checkbox" name="script-conflict">
+            <label>Simulate script conflict</label>
+            </li>
+            </ul>
+        </div>
+        <input type="submit" value="Preview">
+        <input type="button" value="Copy code" id="copy-code">
+        </form>
+    </div>
+    <script src="scripts.js">   
+    </script>
+</body>
+</html>
