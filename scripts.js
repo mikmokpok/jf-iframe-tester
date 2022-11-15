@@ -134,7 +134,8 @@ document
      }else{
         ifr.style.height="529px";
     }
-    }); \n`
+    }); \n`,
+        18
       );
     } else {
       const newTextAreaVal = textAreaVal.replace(
@@ -160,14 +161,14 @@ document
     if (e.target.checked) {
       textarea.value = replaceText(
         textAreaVal,
-        'scrolling="no"',
+        "scrolling=",
         ">",
-        `\n sandbox="allow-forms allow-popups allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation"​ \n`
+        `\n sandbox="allow-forms allow-popups allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation"​ \n`,
+        6
       );
     } else {
       const newTextAreaVal = textAreaVal.replace(
-        `
-    sandbox="allow-forms allow-popups allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation"​`,
+        `sandbox="allow-forms allow-popups allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation"​`,
         ""
       );
       textarea.value = newTextAreaVal;
@@ -185,7 +186,6 @@ document.querySelector("#applyPrefills").addEventListener("click", (e) => {
     textareaVal.indexOf('iframeParams.push("isIframeEmbed=1");') + 38;
   let newTextareaVal =
     textareaVal.substr(0, anchorIndex) +
-    "\n" +
     stringBuilder +
     textareaVal.substr(anchorIndex);
   textarea.value = newTextareaVal;
@@ -225,8 +225,15 @@ const getStringBuilder = () => {
   return stringBuilder;
 };
 
-const replaceText = (textAreaVal, anchorString, endString, appendedString) => {
-  const anchorIndex = textAreaVal.indexOf(anchorString) + anchorString.length;
+const replaceText = (
+  textAreaVal,
+  anchorString,
+  endString,
+  appendedString,
+  offset = 0
+) => {
+  const anchorIndex =
+    textAreaVal.indexOf(anchorString) + anchorString.length + offset;
   const endIndex = textAreaVal.indexOf(endString);
   let newTextAreaVal =
     textAreaVal.substr(0, anchorIndex) +
