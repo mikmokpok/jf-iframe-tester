@@ -1,0 +1,13 @@
+.textbox-wrapper{
+    width:70%;
+    margin:10px auto;
+    display:flex;
+    gap:10px;
+  }
+  .prefill-text-button{
+    width:70%;
+  }
+  
+  .textbox-wrapper:has(".prefill-text-button-single"){
+    justify-content:center;
+  }

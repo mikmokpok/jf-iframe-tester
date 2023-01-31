@@ -1,0 +1,20 @@
+.header{
+  background:white;
+  padding:25px;
+  box-shadow: 0px 0px 10px 1px #777;
+}
+.header-contents{
+    position:relative;
+    display:flex;
+  }
+  .header-contents img{
+    width:8%;
+    align-self: center;
+  }
+  .subheader{
+    font-size:20px;
+    font-weight:bold;
+    color: #333;
+    margin-left:15px;
+    cursor:default;
+  }
