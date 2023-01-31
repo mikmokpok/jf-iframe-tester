@@ -1,16 +1,21 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import AceEditor from "react-ace";
 import "./Tweaker.css";
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
-import Options from "./../options/Options";
+import Options from "../Options/Options";
 
 export default function Tweaker() {
+  const aceEditor = useRef();
   const [code, setCode] = useState('');
 
+  useEffect(() => {
+    aceEditor.current.editor.setValue(code);
+  }, [code])
+  
   const onChange = (newValue) => {
-    setCode(newValue)
+    setCode(newValue);
   }
 
   return (
@@ -20,6 +25,7 @@ export default function Tweaker() {
       <div className="tweaker-fieldset">
         <AceEditor
           mode="html"
+          ref={aceEditor}
           theme="github"
           onChange={onChange}
           name="tweaker-box"
@@ -28,7 +34,7 @@ export default function Tweaker() {
           className="tweaker-box"
           fontSize={14}
         />
-        <Options code={code}></Options>
+        <Options code={code} setCode={setCode}></Options>
       </div>
     </div>
   );

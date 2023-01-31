@@ -1,6 +1,6 @@
 import './App.css';
-import Header from './components/header/Header';
-import Tweaker from './components/tweaker/Tweaker';
+import Header from './components/Header/Header';
+import Tweaker from './components/Tweaker/Tweaker';
 
 function App() {
   return (

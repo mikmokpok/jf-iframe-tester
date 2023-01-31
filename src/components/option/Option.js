@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import './Option.css'
 import Button from '@mui/material/Button'
-import OptionFieldSet from './../OptionFieldSet/OptionFieldSet'
+import OptionFieldSet from '../OptionFieldSet/OptionFieldSet'
 import Checkbox from '@mui/material/Checkbox'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import {getPrefillBuilder, insertText} from './helpers.js';
 
 export default function Option(props) {
 
@@ -12,11 +13,14 @@ export default function Option(props) {
   const [textFieldValue, setTextFieldValue] = useState([{key: '', value: ''}]);
 
   const handleApply = (option)=>{
+    let codeOutput;
+
     switch(option){
       case 'prefill':
-        
+        codeOutput = insertText(props.code, 'iframeParams.push("isIframeEmbed=1");', 'ifr.src = src + "?"', `\n      ${getPrefillBuilder(textFieldValue)}`);
         break;
     }
+     props.setCode(codeOutput);
   }
   
   return (
