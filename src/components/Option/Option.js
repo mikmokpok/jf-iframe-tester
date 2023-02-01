@@ -14,6 +14,7 @@ export default function Option(props) {
   ]);
   const [conflict, setConflict] = useState(false);
 
+
   useEffect(() => {
     if (checked === "unchecked") {
       handleUnchecked(props.option);
@@ -148,7 +149,8 @@ export default function Option(props) {
           control={
             <Checkbox
               size="small"
-              onClick={() => {
+              disabled={props.disabled}
+              onClick={(e) => {
                 checked === "checked"
                   ? setChecked("unchecked")
                   : setChecked("checked");

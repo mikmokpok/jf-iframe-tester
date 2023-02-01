@@ -9,11 +9,15 @@ import Options from "../Options/Options";
 export default function Tweaker() {
   const aceEditor = useRef();
   const [code, setCode] = useState("");
+  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    aceEditor.current.editor.setValue(code);
-  }, [code]);
-
+    code.indexOf('JotFormIFrame')==-1 ? setDisabled(true) : setDisabled(false);
+  }, [code])
+  
+  const setNewValue = (value)=>{
+    aceEditor.current.editor.setValue(value);
+  }
   const onChange = (newValue) => {
     setCode(newValue);
   };
@@ -23,7 +27,7 @@ export default function Tweaker() {
       <p className="tweaker-header">Paste your iframe code:</p>
 
       <div className="tweaker-fieldset">
-        <AceEditor
+       <AceEditor
           mode="html"
           ref={aceEditor}
           theme="github"
@@ -34,7 +38,7 @@ export default function Tweaker() {
           className="tweaker-box"
           fontSize={14}
         />
-        <Options code={code} setCode={setCode}></Options>
+        <Options code={code} setCode={setNewValue} disabled={disabled}></Options>
       </div>
     </div>
   );
