@@ -1,6 +1,6 @@
 export const getPrefillBuilder = (prefills) => {
     let stringBuilder = "";
-    prefills.forEach((n)=>{stringBuilder += `iframeParams.push("${n.key}=${n.value}"); \n`;});
+    prefills.forEach((n)=>{stringBuilder += `iframeParams.push("${n.key}=${n.value}");\n`;});
     return stringBuilder;
   };
 
@@ -11,6 +11,6 @@ export const getPrefillBuilder = (prefills) => {
     offset = 0)=>{
     const anchorIndex = text.indexOf(anchorString) + anchorString.length + offset;  
     const endIndex = text.indexOf(endString);
-    let newText = text.substr(0, anchorIndex) + `${appendedString}​` + text.substr(endIndex);
+    let newText = text.substr(0, anchorIndex) + `${appendedString}` + text.substr(endIndex);
     return newText;
   }
