@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AceEditor from "react-ace";
 import "./Tweaker.css";
 import "ace-builds/src-noconflict/mode-html";
@@ -8,15 +8,15 @@ import Options from "../Options/Options";
 
 export default function Tweaker() {
   const aceEditor = useRef();
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState("");
 
   useEffect(() => {
     aceEditor.current.editor.setValue(code);
-  }, [code])
-  
+  }, [code]);
+
   const onChange = (newValue) => {
     setCode(newValue);
-  }
+  };
 
   return (
     <div className="tweaker-wrapper">
