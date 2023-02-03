@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Options.css";
+import Preview from "../Preview/Preview";
 import Option from "../Option/Option.js";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 export default function Options(props) {
   const [alert, setAlert] = useState({
@@ -13,24 +16,38 @@ export default function Options(props) {
     type: "success",
   });
 
-  useEffect(() => {
+  const [modal, setModal] = useState(false);
+  const [scriptConflict, setScriptConflict] = useState(false);
+
+  const showAlert = (alertConfig) => {
+    setAlert(alertConfig);
     setTimeout(() => {
       setAlert({ ...alert, on: false, message: "" });
-    }, 5000);
-  }, [alert]);
+    }, 3000);
+  };
 
   const copyCode = () => {
     if (props.code.length > 0) {
       navigator.clipboard.writeText(props.code);
-      setAlert({ on: true, message: "Copied to clipboard!", type: "success" });
+      showAlert({ on: true, message: "Copied to clipboard!", type: "success" });
     } else {
-      setAlert({ on: true, message: "Nothing to copy!", type: "error" });
+      showAlert({ on: true, message: "Nothing to copy!", type: "error" });
     }
+  };
+
+  const showPreview = () => {
+    setModal(true);
   };
 
   return (
     <div className="options-panel">
-      <Tooltip disableFocusListener={!props.disabled} disableHoverListener={!props.disabled} placement="top" title={<h2>No Jotform iframe code found!</h2>}>
+      {modal ? <Preview setModal={setModal}></Preview> : ""}
+      <Tooltip
+        disableFocusListener={!props.disabled}
+        disableHoverListener={!props.disabled}
+        placement="top"
+        title={<h2>No Jotform iframe code found!</h2>}
+      >
         <div className="options-module">
           <h3>Options:</h3>
           <ul className="option-list">
@@ -41,8 +58,6 @@ export default function Options(props) {
               option="prefill"
               code={props.code}
               setCode={props.setCode}
-              alert={alert}
-              setAlert={setAlert}
               disabled={props.disabled}
             />
             <Option
@@ -52,8 +67,6 @@ export default function Options(props) {
               option="cutoff"
               code={props.code}
               setCode={props.setCode}
-              alert={alert}
-              setAlert={setAlert}
               disabled={props.disabled}
             />
             <Option
@@ -62,8 +75,6 @@ export default function Options(props) {
               option="typage"
               code={props.code}
               setCode={props.setCode}
-              alert={alert}
-              setAlert={setAlert}
               disabled={props.disabled}
             />
             <Option
@@ -72,8 +83,6 @@ export default function Options(props) {
               option="autoscroll"
               code={props.code}
               setCode={props.setCode}
-              alert={alert}
-              setAlert={setAlert}
               disabled={props.disabled}
             />
             <Option
@@ -82,8 +91,6 @@ export default function Options(props) {
               option="scrolling"
               code={props.code}
               setCode={props.setCode}
-              alert={alert}
-              setAlert={setAlert}
               disabled={props.disabled}
             />
             <Option
@@ -93,8 +100,6 @@ export default function Options(props) {
               option="fallback"
               code={props.code}
               setCode={props.setCode}
-              alert={alert}
-              setAlert={setAlert}
               disabled={props.disabled}
             />
             <Option
@@ -103,22 +108,46 @@ export default function Options(props) {
               option="sandbox"
               code={props.code}
               setCode={props.setCode}
-              alert={alert}
-              setAlert={setAlert}
               disabled={props.disabled}
             />
             <h4>Preview modifiers:</h4>
-            <Option
-              fieldless
-              labelText="Simulate script conflict"
-              option="conflict"
-              disabled={props.disabled}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  size="small"
+                  disabled={props.disabled}
+                  onClick={() => {
+                    setScriptConflict(!scriptConflict);
+                  }}
+                />
+              }
+              label="Simulate script conflict"
             />
           </ul>
           <div className="button-wrapper">
-            <Button variant="contained" color="success" size="medium" disabled={props.disabled}>
-              Preview
-            </Button>
+            <form
+              class="preview-form"
+              action={"/preview/preview.php"}
+              method="post"
+              target="preview-iframe"
+            >
+              <input type="text" name="iframe-content" value={props.code} />
+              <input
+                type="checkbox"
+                name="script-conflict"
+                checked={scriptConflict}
+              />
+              <Button
+                type="submit"
+                onClick={() => showPreview()}
+                variant="contained"
+                color="success"
+                size="medium"
+                disabled={props.disabled}
+              >
+                Preview
+              </Button>
+            </form>
             <Button
               variant="contained"
               color="success"
@@ -130,11 +159,11 @@ export default function Options(props) {
             </Button>
           </div>
         </div>
-     </Tooltip>
+      </Tooltip>
       <Slide in={alert.on}>
         <Alert
           onClose={() => {
-            setAlert({ ...alert, on: false, message: "" });
+            showAlert({ ...alert, on: false, message: "" });
           }}
           severity={alert.type}
           style={{
@@ -145,7 +174,6 @@ export default function Options(props) {
             width: "100%",
           }}
         >
-          {" "}
           {alert.message}
         </Alert>
       </Slide>

@@ -1,25 +1,24 @@
-
-  .tweaker-header{
-    width:100%;
-    margin:auto;
-    font-size:28px;
-    padding: 40px 20px;
-    background:white;
-    cursor:default;
-    font-weight:bold;
-  }
-  .tweaker-box{
-    margin:auto;
-    box-shadow: 0px 0px 10px 1px #777;
-    }
-  .tweaker-fieldset{
-      display:flex;
-      justify-content: center;
-    }
-   .tweaker-wrapper{
-      display:flex;
-      flex-direction:column;
-      width:1000px;
-      margin: 100px auto;
-      box-shadow: 0px 0px 10px 1px #777;
-    }
+.tweaker-header {
+  width: 100%;
+  margin: auto;
+  font-size: 28px;
+  padding: 40px 20px;
+  background: white;
+  cursor: default;
+  font-weight: bold;
+}
+.tweaker-box {
+  margin: auto;
+  box-shadow: 0px 0px 10px 1px #777;
+}
+.tweaker-fieldset {
+  display: flex;
+  justify-content: center;
+}
+.tweaker-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  margin: 100px auto;
+  box-shadow: 0px 0px 10px 1px #777;
+}
