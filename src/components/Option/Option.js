@@ -91,6 +91,7 @@ export default function Option(props) {
               variant="contained"
               color="success"
               size="small"
+              disabled={textFieldValue.value || textFieldValue[0].value ? false : true}
               onClick={() =>
                 handleApply(
                   props.option,
