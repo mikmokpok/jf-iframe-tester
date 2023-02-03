@@ -127,7 +127,7 @@ export default function Options(props) {
           <div className="button-wrapper">
             <form
               class="preview-form"
-              action={"/preview/preview.php"}
+              action={"./preview/preview.php"}
               method="post"
               target="preview-iframe"
             >

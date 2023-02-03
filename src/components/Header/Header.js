@@ -6,7 +6,7 @@ export default function header() {
     <div className="header">
       <div className="header-contents">
         <img
-          src="/images/jotform-logo.png"
+          src="./images/jotform-logo.png"
           alt="Jotform logo"
           className="jotform-logo"
         ></img>
